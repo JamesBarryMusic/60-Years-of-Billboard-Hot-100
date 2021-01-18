@@ -149,7 +149,13 @@ One of the most unmistakable trends is that, in addition to becoming more energe
 
 <p align='center'><img src="imgs/energy-vs-loudness-over-time.png" width='800px'></p>
 
-This phenomenon is called [The Loudness Wars](https://www.npr.org/2009/12/31/122114058/the-loudness-wars-why-music-sounds-worse). Listeners have a habit of preferring louder music over softer music, and as the music marketplace becomes increasingly crowded, the average volume of songs is pushed higher to stand out more, resulting in an inevitable "loudness arms race".
+This phenomenon is called [The Loudness Wars](https://www.npr.org/2009/12/31/122114058/the-loudness-wars-why-music-sounds-worse). Listeners have a habit of preferring louder music over softer music, and as the music marketplace becomes increasingly crowded, the average volume of songs is pushed higher to stand out more, resulting in an inevitable "loudness arms race". Another iteresting year to look at is 2010. 
+
+EBU R 128 is a recommendation for loudness normalisation and maximum level of audio signals. It is primarily followed during audio mixing of television and radio programmes and adopted by broadcasters to measure and control programme loudness. It was first issued by the European Broadcasting Union in August 2010 and most recently revised in June 2014.
+
+R 128 employs an international standard for measuring audio loudness, stated in the ITU-R BS.1770 recommendation and using the loudness measures LU (loudness units) and LUFS (loudness units referenced to full scale), specifically created with this purpose. The EBU Tech 3341 document further clarified loudness metering implementation and practices in 2016.
+
+In recent years EBU R 128 has been discussed to be a benchmark not only for television and radio, but streaming aswell. But to no prevail - most streaming services still normalize to (**-14 dB**) integrated LUFS and (**-1**) dB TP (True Peak). I highly recomend cracking open google and do a deep dive into this subject.
 
 <p align='center'><img src="imgs/loudness-over-time.png" width='800px'></p>
 
@@ -172,10 +178,6 @@ Usually the axes of a tSNE embedding hold no significant meaning, but because of
 It is important to emphasize that these embeddings are based only on audio features; songs of different genres that stylistically sound nothing alike might still be projected next to each other because they contain similar features like acousticness, loudness, tempo, etc. For this reason, embedding only audio feature data may be of limited usefulness (Is embedding **My Sharona** next to **Hey Jude** really justified? Why is **Every Breath You Take** and **Bette Davis Eyes** so far along the recency axis?)
 
 ## Analysis of Artists
-#### Extreme Artists
-Using the Spotify audio feature data, I constructed audio feature profiles for each artist by averaging the features for each of their songs. The word clouds below show which artists have the highest values for each audio feature. Only artists with at least **5** Hot 100 songs are included since too small a sample may not be representative of the artist's overall work.
-
-<p align='center'><img src="imgs/most-extreme-artists.png" width='800px'></p>
 
 #### Madonna is the Queen of Pop
 Perhaps the most natural first question to ask is simply, "Which artists have the most hit singles?" Amazingly, **Madonna** has charted **35** times and remains the only artist to have produced over **30** hot 100 singles since the **1960s**.
@@ -218,9 +220,6 @@ To visualize the structure of artist collaborations, I plotted the collaboration
 
 The vast majority of collaborations between two artists on the Year-End Hot 100 occur only once. The most notable exception is a well-connected artist in the center that has collaborated four times each with two different artists and twice with numerous others, **Drake**.
 
-Focusing on the largest component of the network, I removed the numerous small and isolated sub-networks, and re-plotted the data so that artists with the most collaborations are placed closer to the center of the plot. With the addition of labeled points, we can see which artists tend to collaborate the most with others and who they have collaborated with.
-
-<p align='center'><img src="imgs/artist-collaboration-network-2.png" width='1000px'></p>
 
 ## Analysis of Lyrics
 
@@ -274,21 +273,6 @@ Topic modeling is a method of discerning what types of topics exist within the c
 
 <p align='center'><img src="imgs/lda.png" width='1000px'></p>
 
-#### Sign of the Times
-
-To see which words are most characteristic of a particular decade, I trained a [naive Bayes classifier](http://blog.aylien.com/naive-bayes-for-dummies-a-simple-explanation/) to predict the decade of a song's release from the song's lyrics. The Naive Bayes model attempts to calculate the probability that a song belongs to a decade given its lyrics, and it does so, partially, by calculating the probability of each individual word appearing in the lyrics given each decade. This **probability of word given decade**, also called the **class conditional probability**, has been used by other analyses to determine which words are most characteristic of a decade. However, the class conditional probability by itself is not sufficient; it must be compared against an unconditional probability that the word will appear in the song regardless of decade. That is, we must calculate how many times the probability of a word appearing in a song given that song's decade is greater than the expected probability of the word in general. It is a principal taken from [market basket analysis](https://select-statistics.co.uk/blog/market-basket-analysis-understanding-customer-behaviour/) called **lift**; the higher the lift for a word given its decade, the more characteristic that word is of that decade.
-
-<p align='center'><img src="imgs/decade-1-grams.png" width='1000px'></p>
-
-I calculated the lift that each decade gives to each unigram, and used these values to generate the word clouds above; greater lifts result in larger words. It appears that popular music was much more wholesome before the turn of the millennium. The same is apparent from the most characteristic bigrams below. Given that hip hop only gained traction in the Billboard charts in the 1990s, it is fitting that the bigram **hip hop** features so prominently where it does.
-
-<p align='center'><img src="imgs/decade-2-grams.png" width='1000px'></p>
-
-The most characteristic trigrams and 4-grams below stop making syntactic sense. Rather, the n-grams are mostly melodic embellishments.
-
-<p align='center'><img src="imgs/decade-3-grams.png" width='1000px'></p>
-
-<p align='center'><img src="imgs/decade-4-grams.png" width='1000px'></p>
 
 #### Extreme Words
 
