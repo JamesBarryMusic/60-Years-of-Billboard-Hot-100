@@ -29,30 +29,22 @@
     + [Extreme Words](#extreme-words)
 - [Conclusion](#conclusion)
 
-## Introduction
-#### A Reboot of a Prior Project
-This analysis originated as a [group-based final project](https://github.com/manksh/EDAV_Dream_Team) for a course in my M.S. in Data Science program called [STAT 5702: Exploratory Data Analysis and Visualization](http://www.columbia.edu/cu/bulletin/uwb/subj/STAT/GR5702-20181-001/). In that project, we examined the lyrics and audio features of America's most popular songs from **1965**-**2015** to gain insights about how our culture and music industry has evolved. However, because the project was conducted primarily in R despite our much greater proficiency with Python, we were relatively hamstrung and had to limit the scope and depth of our explorations. After finishing the class and free to explore the data without constraints, I decided to revisit and extend the project in Python for a more comprehensive analysis.
 
 #### Motivation
-Popular music offers a unique lens through which to study what preoccupies a society, what people value in their entertainment, and how cultural preferences change with each generation. [Billboard Magazine](https://en.wikipedia.org/wiki/Billboard_(magazine)) publishes a yearly chart, the [Year-End Hot 100](https://en.wikipedia.org/wiki/Billboard_Year-End) that ranks the best-performing singles of the United States based on data collected from physical sales, digital sales, radio airplay, and streaming. Many text mining analyses have been performed on the lyrics of these songs, with [Kaylin Pavlik's](https://www.kaylinpavlik.com/50-years-of-pop-music/), whose dataset my group used in the original project, among the most notable. To build on these ideas, for each song, we also incorporated audio-feature data (such as loudness, tempo, danceability, etc.) maintained by Spotify. The combination of data from the Billboard rankings, song lyrics, and Spotify audio features provides many avenues for rich and interesting analysis.
+Popular music offers a unique lens through which to study what preoccupies a society, what people value in their entertainment, and how cultural preferences change with each generation. [Billboard Magazine](https://en.wikipedia.org/wiki/Billboard_(magazine)) publishes a yearly chart, the [Year-End Hot 100](https://en.wikipedia.org/wiki/Billboard_Year-End) that ranks the best-performing singles of the United States based on data collected from physical sales, digital sales, radio airplay, and streaming. To build on these ideas, for each song, I also incorporated audio-feature data (such as loudness, tempo, danceability, etc.) maintained by Spotify. The combination of data from the Billboard rankings, song lyrics, and Spotify audio features provides many avenues for rich and interesting analysis.
 
 ## Building the Dataset
-The [dataset](https://github.com/walkerkq/musiclyrics/blob/master/billboard_lyrics_1964-2015.csv) we originally used consisted of Billboard Year-End Hot 100 Singles from **1965** to **2015** and each single's corresponding lyrics. However, I wanted to build my own dataset for two reasons:
+1. As of writing, the Billboard Year-End charts that are available extend from **1959** to **2019**, providing **60** more years of data from which to extrapolate trends.
 
-1. As of writing, the Billboard Year-End charts that are available extend from **1960** to **2017**, providing **8** more years of data from which to extrapolate trends.
-2. A significant proportion of lyrics in the original dataset contained fused words, where the last word of a line was combined with the first word of the next line. Such an issue posed many obstacles to a clean analysis of the lyrics.
-
-To obtain songs and rankings from Billboard's Year-End Hot 100 charts, I scraped the data from relevant [Wikipedia tables](https://en.wikipedia.org/wiki/Billboard_Year-End_Hot_100_singles_of_2017) for **1960**-**2017**. Because some songs are released at the end of the year, they might chart in the year of its release and in the following year. There were **235** such duplicates, not counting the original songs, and they were removed from the dataset.
+To obtain songs and rankings from Billboard's Year-End Hot 100 charts, I scraped the data from relevant [Wikipedia tables](https://en.wikipedia.org/wiki/Billboard_Year-End_Hot_100_singles_of_2017) for **1959**-**2019**. Because some songs are released at the end of the year, they might chart in the year of its release and in the following year. 
 
 Collecting lyrics for each song proved more involved. Many music services offer API's to query for song lyrics, but all either charge a fee, limit the number of songs that can be queried, or return only a proportion of the lyrics. Fortunately, [genius.com](https://genius.com/Woodkid-run-boy-run-lyrics), [songlyrics.com](http://www.songlyrics.com/woodkid/run-boy-run-lyrics/), [lyricsmode.com](http://www.lyricsmode.com/lyrics/w/woodkid/run_boy_run.html), and [metrolyrics.com](http://www.metrolyrics.com/run-boy-run-lyrics-woodkid.html) serve lyrics on webpages that follow consistent URL naming conventions, meaning the lyric data could also be scraped. For each song, scrapes are conducted sequentially through the four websites; if the scrape of a website fails, then the next website is attempted unless all four have already been exhausted.
 
-Much attention was paid to normalizing the names of artists and songs from the initial Wikipedia scrape (e.g. changing _Sean Combs_ and _P. Diddy_ to _Puff Daddy_) and preparing them into a format suitable for conversion to a URL string (e.g. changing from _Hall & Oates_ to _Hall and Oates_). While scraping for lyrics failed in **3.6%** of songs in the original dataset my group used, doing so with cleaned Wikipedia data resulted in failed scrapes accounting for less than **1%** (**0.78%**) of all songs. The vast majority of lyrics were obtained from genius.com (**93.8%**), with songlyrics.com accounting for almost all of the remaining lyrics (**5.6%**).
+Much attention was paid to normalizing the names of artists and songs from the initial Wikipedia scrape (e.g. changing _Sean Combs_ and _P. Diddy_ to _Puff Daddy_) and preparing them into a format suitable for conversion to a URL string (e.g. changing from _Hall & Oates_ to _Hall and Oates_). The vast majority of lyrics were obtained from genius.com (**45.6%**) & songlyrics.com (**45.1%**), with metrolyrics.com accounting for almost all of the remaining lyrics (**3.6%**).
 
 <p align='center'><img src="imgs/lyric-source-distribution.png" width='800px'></p>
 
-Spotify's audio feature data was then accessed directly by querying Spotify's API using the Billboard Hot 100 songs obtained from Wikipedia. Approximately **3%** of all songs were not queried successfully from Spotify (though this is down from **10%** when using the original dataset).
-
-The final de-duplicated dataset consists of **5566** singles, of which **5396** have Spotify audio feature data and **5516** have lyrics.
+Spotify's audio feature data was then accessed directly by querying Spotify's API using the Billboard Hot 100 songs obtained from Wikipedia. Approximately **5%** of all songs were not queried successfully from Spotify.
 
 ## Analysis of Audio Features
 
@@ -84,7 +76,7 @@ The boxplots below show the distribution of Hot 100 song durations for each year
 
 <p align='center'><img src="imgs/duration-over-time.png" width='800px'></p>
 
-Between **1960** and **1990**, songs saw a nearly uninterrupted increase in median duration from about **~2.5** minutes to **~4.5** minutes, which could be due to the [invention](https://www.timetoast.com/timelines/music-storage-through-time) of the casette tape in the early **1960s** and compact disc in the early **1980s**. Both were new mediums that could store much more music than vinyl records, allowing songs to become much longer. From **1990** onward, Hot 100 songs have gradually shortened to **~3.6** minutes, possibly driven by competition for radio airplay and [diminishing attention spans](https://news.osu.edu/news/2017/04/04/streaming-attention/). Since **2010**, the availability of streaming platforms offers listeners a much wider choice of music than ever before, incentivizing artists to keep songs shorter and tighter lest they be skipped.
+Between **1959** and **1990**, songs saw a nearly uninterrupted increase in median duration from about **~2.5** minutes to **~4.5** minutes, which could be due to the [invention](https://www.timetoast.com/timelines/music-storage-through-time) of the casette tape in the early **1960s** and compact disc in the early **1980s**. Both were new mediums that could store much more music than vinyl records, allowing songs to become much longer. From **1990** onward, Hot 100 songs have gradually shortened to **~3.6** minutes, possibly driven by competition for radio airplay and [diminishing attention spans](https://news.osu.edu/news/2017/04/04/streaming-attention/). Since **2010**, the availability of streaming platforms offers listeners a much wider choice of music than ever before, incentivizing artists to keep songs shorter and tighter lest they be skipped.
 
 #### Cutting Out the Instrumental Fat
 
@@ -125,7 +117,7 @@ I initially found the positive correlation between danceability and valence rath
 We previously saw that the rise in the median speechiness of songs and the number of expicit songs is closely linked, and the above violin plot shows that the median speechiness of explicit Hot 100 songs is **~0.1** higher than that of non-explicit Hot 100 songs.
 
 #### More Energy
-The negative relationship between acousticness and energy becomes more interesting when we account for how it has evolved over the years. The smaller scatterplots show the acousticness and energy of each Hot 100 song faceted by decade, while the larger scatterplot shows the acousticness and energy of all Hot 100 songs with release year expressed as a color.
+The negative relationship between acousticness and energy becomes more interesting when we account for how it has evolved over the years. The smaller scatterplots show the acousticness and energy of each Hot 100 song faceted by decade, while the larger scatterplot shows the acousticness and energy of all Hot 100 songs with release year expressed as a color.Another factor to keep in mind is the Spotify classification of the metric "energy" - most times the classification is based on sound intensity meassurements which arguably makes it a flawed analysis.
 
 <p align='center'><img src="imgs/energy-vs-acousticness-over-time.png" width='800px'></p>
 
