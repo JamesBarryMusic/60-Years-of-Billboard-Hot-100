@@ -266,8 +266,6 @@ As with the [projections of songs](#embedding-in-latent-audio-space) onto a **2*
 
 <p align='center'><img src="imgs/word-embeddings.png" width='1000px'></p>
 
-Once again, we observe that **money** is closely related to explicit words; perhaps while most artists are busy singing about love, rappers are more pre-occupied with wealth or the lack of it. The outsized attention African American artists pay to money and wealth in their songs could be yet another effect of [economic racial discrimination](https://www.epi.org/blog/the-racial-wealth-gap-how-african-americans-have-been-shortchanged-out-of-the-materials-to-build-wealth/).
-
 
 
 ## Conclusion
