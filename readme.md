@@ -268,24 +268,10 @@ As with the [projections of songs](#embedding-in-latent-audio-space) onto a **2*
 
 Once again, we observe that **money** is closely related to explicit words; perhaps while most artists are busy singing about love, rappers are more pre-occupied with wealth or the lack of it. The outsized attention African American artists pay to money and wealth in their songs could be yet another effect of [economic racial discrimination](https://www.epi.org/blog/the-racial-wealth-gap-how-african-americans-have-been-shortchanged-out-of-the-materials-to-build-wealth/).
 
-#### Topic Modeling
-Topic modeling is a method of discerning what types of topics exist within the corpus of lyrics and how much of each topic is present within each song. [Latent Dirichlet Allocation](http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/) (LDA) is a particularly powerful technique that models topics as a distribution over words and songs as a distribution over topics. In modeling the lyrics, I found **6** topics to be ideal; more than that, and the topics either become incoherent or signficantly overlapped with each other. The word clouds below show the most probable words to appear in each topic, with my interpretation of the topic in each title.
 
-<p align='center'><img src="imgs/lda.png" width='1000px'></p>
-
-
-#### Extreme Words
-
-In addition to being characterstic of particular decades, some words are more closely tied to high values of certain audio features. For example, given lyrics for all the Hot 100 songs and those songs' danceability, we can ask, "What are the most danceable words?"
-
-One way to answer this question is to use [ridge regression](https://en.wikipedia.org/wiki/Tikhonov_regularization), treating the lyrics as explanatory variables and a target audio feature as the response variable. In learning how to predict the audio feature from lyrics, the regression will learn coefficients for each word. The larger the coefficient, the more closely related that word is to the target feature.
-
-<p align='center'><img src="imgs/most-extreme-words.png" width='1000px'></p>
-
-The word clouds above show the words with the largest coefficients for each target feature. The R<sup>2</sup> value is a measure of how effectively the audio feature can be predicted using only the lyrics, with **1.0** indicating perfect predictions and **0.0** indicating no better than random guessing. While most of the audio features cannot be reliably predicted using only the lyrics, it appears that the most significant words for each audio feature is somewhat reasonable.
 
 ## Conclusion
 
-Combining songs from the Billboard Year-End Hot 100 charts from **1960**-**2017**, lyrics scraped from the web, and audio feature data gathered from Spotify yielded many angles for understanding mainstream music and how it has evolved. Through a close examination of audio features, we observed a trend of songs becoming shorter, more energetic, louder, and less acoustic, ostensibly all reactions to a shrinking and increasingly competitive market for music. We also saw how the rise of rap and hip hop fundamentally changed the music industry, resulting in a striking increase in artist collaborations and leaving an indelible impression on the textual content of popular music. Including data from multiple sources also enabled the interesting use of supervised and unsupervised machine learning algorithms to extract additional insights, such as determining the most characteristic n-grams of each decade,  finding the most relevant words to each audio feature, and embedding songs, artists, and decades into a common latent space.
+Combining songs from the Billboard Year-End Hot 100 charts from **1959**-**2019**, lyrics scraped from the web, and audio feature data gathered from Spotify yielded many angles for understanding mainstream music and how it has evolved. Through a close examination of audio features, we observed a trend of songs becoming shorter, more energetic, louder, and less acoustic, ostensibly all reactions to a shrinking and increasingly competitive market for music. We also saw how the rise of rap and hip hop fundamentally changed the music industry, resulting in a striking increase in artist collaborations and leaving an indelible impression on the textual content of popular music. Including data from multiple sources also enabled the interesting use of supervised and unsupervised machine learning algorithms to extract additional insights, such as determining the most characteristic n-grams of each decade,  finding the most relevant words to each audio feature, and embedding songs, artists, and decades into a common latent space.
 
-I hope that you enjoyed this extended analysis whether it confirmed your preconceived notions about popular music, offered new insights to ruminate on, or both. Knowing where the music industry has been provides important context for understanding where it is headed. If you have additional ideas about how to further expand or explore the dataset, I encourage you to download it from [here](https://github.com/zhao1701/spotify-song-lyric-analysis/blob/master/data/billboard-lyrics-spotify.csv). Thank you for reading!
+Thank you for reading!
