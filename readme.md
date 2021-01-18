@@ -114,14 +114,14 @@ I initially found the positive correlation between danceability and valence rath
 
 <p align='center'><img src="imgs/bivariate-distributions.png" width='800px'></p>
 
-We previously saw that the rise in the median speechiness of songs and the number of expicit songs is closely linked, and the above violin plot shows that the median speechiness of explicit Hot 100 songs is **~0.1** higher than that of non-explicit Hot 100 songs.
+We previously saw that the rise in the median speechiness of songs and the number of explicit songs is closely linked, and the above violin plot shows that the median speechiness of explicit Hot 100 songs is **~0.1** higher than that of non-explicit Hot 100 songs.
 
 #### More Energy
-The negative relationship between acousticness and energy becomes more interesting when we account for how it has evolved over the years. The smaller scatterplots show the acousticness and energy of each Hot 100 song faceted by decade, while the larger scatterplot shows the acousticness and energy of all Hot 100 songs with release year expressed as a color.Another factor to keep in mind is the Spotify classification of the metric "energy" - most times the classification is based on sound intensity meassurements which arguably makes it a flawed analysis.
+The negative relationship between acousticness and energy becomes more interesting when we account for how it has evolved over the years. The smaller scatterplots show the acousticness and energy of each Hot 100 song faceted by decade, while the larger scatterplot shows the acousticness and energy of all Hot 100 songs with release year expressed as a color.
 
 <p align='center'><img src="imgs/energy-vs-acousticness-over-time.png" width='800px'></p>
 
-There is a clear trend of decreasing acousticness and increasing energy over time. The distribution of acousticness and energy is much more even during the **1960s** and even forms a slight cluster around **0.8** acousticness and **0.33** energy. However, even by the **1970s**, the densest region in the distribution is near **0.0** acousticness and **0.75** energy. With each passing decade, the number of Hot 100 songs with acousticness exceeding **0.2** becomes less frequent, and the distribution in the energy of these songs tightens around **0.75**.
+There is a clear trend of decreasing acousticness and increasing energy over time. The distribution of acousticness and energy is much more even during the **1960s** and even forms a slight cluster around **0.8** acousticness and **0.33** energy. However, even by the **1970s**, the densest region in the distribution is near **0.0** acousticness and **0.75** energy. With each passing decade, the number of Hot 100 songs with acousticness exceeding **0.2** becomes less frequent, and the distribution in the energy of these songs tightens around **0.75**. This clearly also higlights the issue with using Spotifys classifications when doing larger analysis projects like this - especially with subjective properties like *energy*. Throughout this project there is clear signs that Spotify's energy classification is heavily influenced by sound intensity - rather than supervised annotated properties - which makes it a rather flat metric to use.
 
 <p align='center'><img src="imgs/acousticness-over-time.png" width='800px'></p>
 
