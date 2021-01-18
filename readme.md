@@ -1,4 +1,4 @@
-# Exploring, Analyzing, and Modeling 58 years of Popular Music
+# Exploring, Analyzing, and Modeling 60 years of Popular Music
 
 - [Motivation](#motivation)
 - [Building the Dataset](#building-the-dataset)
@@ -34,7 +34,7 @@
 Popular music offers a unique lens through which to study what preoccupies a society, what people value in their entertainment, and how cultural preferences change with each generation. [Billboard Magazine](https://en.wikipedia.org/wiki/Billboard_(magazine)) publishes a yearly chart, the [Year-End Hot 100](https://en.wikipedia.org/wiki/Billboard_Year-End) that ranks the best-performing singles of the United States based on data collected from physical sales, digital sales, radio airplay, and streaming. To build on these ideas, for each song, I also incorporated audio-feature data (such as loudness, tempo, danceability, etc.) maintained by Spotify. The combination of data from the Billboard rankings, song lyrics, and Spotify audio features provides many avenues for rich and interesting analysis.
 
 ## Building the Dataset
-1. As of writing, the Billboard Year-End charts that are available extend from **1959** to **2019**, providing **60** more years of data from which to extrapolate trends.
+1. As of writing, the Billboard Year-End charts that are available extend from **1959** to **2019**, providing **60** years of data from which to extrapolate trends.
 
 To obtain songs and rankings from Billboard's Year-End Hot 100 charts, I scraped the data from relevant [Wikipedia tables](https://en.wikipedia.org/wiki/Billboard_Year-End_Hot_100_singles_of_2017) for **1959**-**2019**. Because some songs are released at the end of the year, they might chart in the year of its release and in the following year. 
 
