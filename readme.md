@@ -1,6 +1,6 @@
 # Exploring, Analyzing, and Modeling 58 years of Popular Music
 
-- [Introduction](#introduction)
+- [Motivation](#motivation)
 - [Building the Dataset](#building-the-dataset)
 - [Analysis of Audio Features](#analysis-of-audio-features)
     + [Better Technology and Worse Attention Spans](#better-technology-and-worse-attention-spans)
