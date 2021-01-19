@@ -1,4 +1,4 @@
-# 60 years of Popular Music, US
+# 60 years of Popular Music, Billboard
 
 - [Motivation](#motivation)
 - [Building the Dataset](#building-the-dataset)
