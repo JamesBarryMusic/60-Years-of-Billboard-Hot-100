@@ -1,4 +1,4 @@
-# Exploring, Analyzing, and Modeling 60 years of Popular Music
+# 60 years of Popular Music, US
 
 - [Motivation](#motivation)
 - [Building the Dataset](#building-the-dataset)
